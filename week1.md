@@ -24,6 +24,7 @@
 
 #### 퀘스트 수행 과정
 gist 링크: https://gist.github.com/co2ma/02728a87267125db6d075d5b30506dff
+
 ---
 
 ## 퀘스트 2: 스마트 다이어트 코치
