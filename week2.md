@@ -90,3 +90,33 @@ AI의 할루시네이션 사례를 일부러 생성하고, 그에 대한 검증 
    - 신뢰 가능한 정보 요청법
    - 출처를 명확히 요구하기 (`출처를 표기해줘`, `참고 문헌이 있으면 알려줘`)
    - 복수의 답변 요구 후 비교
+
+---
+# 퀘스트 수행 과정
+
+## 퀘스트 선정
+- **K003**: `🕵️ 퀘스트 4: 할루시네이션 탐정`
+- **J243**:
+- **J215**:
+- **J158**: `📘 퀘스트 3: 마크다운 자동화 마스터`
+
+## 퀘스트 수행
+<details>
+<summary>K003</summary>
+  
+</details>
+
+<details>
+<summary>J243</summary>
+  
+</details>
+
+<details>
+<summary>J215</summary>
+  
+</details>
+
+<details>
+<summary>J158</summary>
+  
+</details>
