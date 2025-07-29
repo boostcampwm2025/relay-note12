@@ -113,7 +113,51 @@ AI의 할루시네이션 사례를 일부러 생성하고, 그에 대한 검증 
 
 <details>
 <summary>J215</summary>
-  
+
+### 07/29 수행결과
+
+- Day 11에 진행한 부스트 영상 서비스에서 Event Looper 클래스 코드를 예시에서 나온 문법으로 정리해달라고 프롬프트를 전달했습니다.
+
+- 실행 결과
+```
+EventLooper.js
+EventLooper 클래스
+Node.js의 EventEmitter를 상속받아, 영상 처리 파이프라인(등록 → 변환 → 검증)을 이벤트 기반으로 관리하는 클래스입니다.
+
+생성자 및 주요 변수
+eventQueue: 이벤트 큐 객체
+conversionModule: 변환 모듈
+validationModule: 검증 모듈
+isRunning: 루프 실행 상태
+loopInterval: 루프 주기(ms)
+intervalId: setInterval ID
+processingStatus: 각 단계별 처리 상태를 저장하는 객체
+주요 함수
+### setupEventListeners
+각 모듈 및 큐에서 발생하는 이벤트를 수신하여, 적절한 처리 함수로 연결합니다.
+강조: 이벤트 연결이 누락되면 정상 동작하지 않으니 주의!
+### start
+루프를 시작하고, 주기적으로 큐를 확인하여 처리합니다.
+이미 실행 중이면 중복 실행을 방지합니다.
+### processQueues
+등록, 변환, 검증 큐를 순차적으로 처리합니다.
+### processRegistration / processConversion / processValidation
+각 큐가 비어있지 않으면 dequeue 요청 이벤트를 발생시킵니다.
+강조: 이미 처리 중이거나, 선행 단계가 진행 중이면 건너뜁니다.
+### processRegistrationVideo / processConversionVideo / processValidationVideo
+dequeue된 영상을 받아 다음 단계로 넘기거나, 실패 시 큐에 재등록합니다.
+강조: 영상이 없거나 오류 발생 시 상태 플래그를 반드시 초기화해야 합니다.
+### handleConversionData / handleValidationData
+변환/검증 완료 시, 상태를 갱신하고 다음 큐에 등록하거나 상태 변경 이벤트를 발생시킵니다.
+### stop
+루프를 중지하고, interval을 해제합니다.
+예외 처리 및 주의사항
+각 처리 함수에서 오류 발생 시 콘솔에 에러 메시지를 출력하고, 상태 플래그를 적절히 초기화해야 합니다.
+이벤트 기반 구조이므로, 이벤트 누락/중복에 주의해야 합니다.
+```
+   - 제가 직접 짠 함수이지만, 제가 Event Looper 클래스 구현을 설명할 때 보다 더욱 잘 설명해주는 것 같다고 느꼈습니다.
+   - AI는 어떻게 사용하는 가에 따라 사용하는 방법이 무궁무진하다고 느꼈고 다음에는 문법을 좀 더 구체적으로 제시해서 실행해봐야겠다고 생각했습니다.
+
 </details>
 
 <details>
