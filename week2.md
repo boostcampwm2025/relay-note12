@@ -158,6 +158,86 @@ dequeue된 영상을 받아 다음 단계로 넘기거나, 실패 시 큐에 재
    - 제가 직접 짠 함수이지만, 제가 Event Looper 클래스 구현을 설명할 때 보다 더욱 잘 설명해주는 것 같다고 느꼈습니다.
    - AI는 어떻게 사용하는 가에 따라 사용하는 방법이 무궁무진하다고 느꼈고 다음에는 문법을 좀 더 구체적으로 제시해서 실행해봐야겠다고 생각했습니다.
 
+### 07/31 수행결과
+
+- Day 13에 구현한 committ.js 파일을 요약해달라고 보냈습니다.
+- 프롬프트는 아래 코드를 Markdown 형식으로 정리해주세요. 함수 이름은 ###로, 변수는 변수명으로, 경고 사항은 강조, 함수의 흐름이 잘 나타나도록 -> 화살표를 이용해서 정리해줘 와 같이 함수의 흐름 정리를 추가로 부탁했습니다.
+
+- 수행 결과
+## commit.js
+### execute 함수
+커밋 메시지를 받아 Git 커밋을 생성하는 함수입니다.
+-----
+**함수 흐름**
+1. 입력 메시지 확인
+   → message가 없으면
+   → message를 입력해주세요 출력 후 종료
+
+2. Git 저장소 존재 확인
+   → .git 폴더가 없으면
+   → Git repository가 없습니다. 출력 후 종료
+
+3. index 파일 존재 확인
+   → indexPath = index
+   → index 파일이 없으면
+   → index 파일이 생성되지 않았습니다. 출력 후 종료
+
+4. index 파일 읽기 및 파싱
+→ indexContent 읽기
+→ JSON 파싱 실패 시
+→ 인덱스를 읽어오는데 오류가 발생했습니다. 출력 후 종료
+
+5. index 엔트리 확인
+→ index.entries가 없거나 비어있으면
+→ commit 할 것이 없습니다. 출력 후 종료
+
+6. 트리 구조 생성
+→ rootTree, filesByDirectory 등 초기화
+→ index 엔트리를 디렉토리별로 분류
+→ 각 디렉토리별로 Tree 객체 생성 및 파일 추가
+→ 하위 디렉토리부터 상위 디렉토리로 트리 해시 생성
+→ 상위 디렉토리에 하위 트리 추가
+
+7. 루트 트리 해시 생성
+→ rootTreeHash 저장
+
+8. 부모 커밋 해시 확인
+→ headPath = HEAD
+→ HEAD가 ref면 참조 파일에서 커밋 해시 읽기
+→ 아니면 HEAD 내용 사용
+→ parentHashes에 저장
+
+9. 커밋 정보 생성
+→ timestamp, authorInfo 등 생성
+→ Commit 객체 생성
+
+10. 커밋 저장 및 HEAD 갱신
+→ commitHash 저장
+→ HEAD가 ref면 참조 파일에, 아니면 HEAD에 커밋 해시 기록
+→ 최신 커밋 해시 및 메시지 출력
+
+11. index 초기화
+→ indexPath에 빈 엔트리 저장
+→ 실패 시 index 초기화 실패 출력
+
+**주요 변수**
+- message: 커밋 메시지
+- indexPath: index 경로
+- index: 파싱된 인덱스 데이터
+- rootTree: 루트 트리 객체
+- filesByDirectory: 디렉토리별 파일 목록
+- trees: 디렉토리별 트리 객체
+- rootTreeHash: 루트 트리 해시
+- parentHashes: 부모 커밋 해시 배열
+- headPath: HEAD 경로
+- commit: Commit 객체
+- commitHash: 생성된 커밋 해시
+-----
+***경고 및 예외 처리***
+- message, .git 폴더, index 파일, index 엔트리 등 필수 값이 없으면 즉시 종료
+- index 파일 파싱, 커밋 저장, index 초기화 등에서 오류 발생 시 콘솔에 에러 메시지 출력
+-----
+
 </details>
 
 <details>
